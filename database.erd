@@ -4,13 +4,13 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -64.4712,
+    "scrollTop": -184.0015,
     "scrollLeft": 0,
     "zoomLevel": 1,
     "show": 431,
     "database": 16,
     "databaseName": "",
-    "canvasType": "@dineug/erd-editor/builtin-schema-sql",
+    "canvasType": "ERD",
     "language": 1,
     "tableNameCase": 4,
     "columnNameCase": 2,
@@ -101,7 +101,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1713872538511,
+          "updateAt": 1714047157625,
           "createAt": 1713871479531
         }
       },
