@@ -9,5 +9,9 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 
 public class UserController : CostumeController
 {
-
+    [HttpGet]
+    public string Print()
+    {
+        return "hello there";
+    }
 }
