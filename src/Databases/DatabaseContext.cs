@@ -1,12 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
-namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
+namespace sda_onsite_2_csharp_backend_teamwork.src.Databases;
+
+
+public class DataBaseContext
 {
-    public class DataBaseContext
-    {
+    public IEnumerable<User> users;
 
+    public DataBaseContext()
+    {
+        users = [
+            new User("1", "Faisal", "Mohammed", "faisal@faisal.com", "123456", 21, "Admin"),
+            new User("1", "Sattam", "Ahmed", "Sattam@faisal.com", "112233", 18, "Costumer"),
+            new User("1", "Abdulaziz", "Fathe", "Abdulaziz@faisal.com", "asdfgh", 03, "Costumer"),
+            new User("1", "Turki", "Omar", "Turki@faisal.com", "password1", 72, "Costumer")
+        ];
     }
 }
