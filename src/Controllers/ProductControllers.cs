@@ -26,11 +26,11 @@ namespace sda_backend_teamwork.src.Controllers
         }
 
         // [HttpGet("{productId}")] //Build endpoint for single entity
-        // public List<Product> findOne(int productId, string ProductName)
+        // public Product findOne(string productId)
         // {
 
-        //     Console.WriteLine($"This is the id: {productId} and the name: {ProductName}");
-        //     return _products;
+        //     Console.WriteLine($"This is the id: {productId}");
+        //    ;
         // }
 
 

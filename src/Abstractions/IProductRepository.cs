@@ -9,6 +9,9 @@ namespace sda_backend_teamwork.src.Abstractions
         public List<Product> findAll();
 
 
+        public Product? findOne(string productId);
+
+
 
     }
 }
