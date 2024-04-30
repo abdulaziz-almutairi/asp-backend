@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductService, ProductService>(); //this is the built-in DI container for the Service
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is the built-in DI container for the Repository
 
-builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
+builder.Services.AddScoped<ICustomerOrderRepository, ICustomerOrderRepository>();
 
 
 var app = builder.Build();
