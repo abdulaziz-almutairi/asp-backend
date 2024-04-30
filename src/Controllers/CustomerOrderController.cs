@@ -38,7 +38,7 @@ public class CustomerOrderController : ControllerBase
     public IActionResult CreateOrder(CustomerOrder order)
     {
         _orderService.CreateOrder(order);
-        return CreatedAtAction(nameof(GetOrderById), new { id = order.id }, order);
+        return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order);
     }
 
     [HttpDelete("{id}")]
