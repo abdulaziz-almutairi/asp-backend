@@ -20,6 +20,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is t
 var app = builder.Build();
 app.MapControllers();// Should be added after the app variable
 
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
