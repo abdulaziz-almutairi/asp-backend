@@ -1,11 +1,12 @@
 
 using Microsoft.AspNetCore.Mvc;
+
+using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
-using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
-using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
-namespace sda_backend_teamwork.src.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork.srcc.Controllers
+
 {
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -27,11 +28,11 @@ namespace sda_backend_teamwork.src.Controllers
         }
 
         // [HttpGet("{productId}")] //Build endpoint for single entity
-        // public List<Product> findOne(int productId, string ProductName)
+        // public Product findOne(string productId)
         // {
 
-        //     Console.WriteLine($"This is the id: {productId} and the name: {ProductName}");
-        //     return _products;
+        //     Console.WriteLine($"This is the id: {productId}");
+        //    ;
         // }
 
 
