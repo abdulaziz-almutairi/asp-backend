@@ -1,9 +1,8 @@
-
-
 using Microsoft.AspNetCore.Mvc;
-using sda_backend_teamwork.src.Entities;
 
-namespace sda_backend_teamwork.src.Database
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+
+namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 
 {
     public class DatabaseContext
