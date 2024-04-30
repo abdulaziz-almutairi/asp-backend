@@ -22,6 +22,7 @@ builder.Services.AddControllers();
 // builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is the built-in DI container for the Repository
 
 // builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
+builder.Services.AddScoped<ICustomerOrderRepository, ICustomerOrderRepository>();
 
 
 var app = builder.Build();

@@ -1,7 +1,7 @@
 
 using sda_backend_teamwork.src.Abstractions;
 using sda_backend_teamwork.src.Database;
-using sda_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.Entities;
 
 namespace sda_backend_teamwork.src.Controllers
 {
@@ -19,6 +19,6 @@ namespace sda_backend_teamwork.src.Controllers
             return _products;
         }
 
-       
+
     }
 }

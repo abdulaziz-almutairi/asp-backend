@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace sda_onsite_2_csharp_backend_teamwork;
+namespace sda_onsite_2_csharp_backend_teamwork.src;
 
 
 public class CustomerOrder
 {
-    public Guid id { get; } = Guid.NewGuid();
-    public int userId { get; set; }
+    public Guid Id { get; } = Guid.NewGuid();
+    public int UserId { get; set; }
 
-    public DateTime date { get; set; }
-    public string status { get; set; }
-    public string address { get; set; }
+    public DateTime Date { get; set; }
+    public string Status { get; set; }
+    public string Address { get; set; }
 
 
 }

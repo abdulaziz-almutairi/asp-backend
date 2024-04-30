@@ -20,7 +20,15 @@ public class CustomerOrderRepository : ICustomerOrderRepository
 
     public CustomerOrder GetOrderById(int orderId)
     {
-        return _orders.FirstOrDefault(order => order.userId == orderId);
+        var getOrder = _orders.FirstOrDefault(order => order.UserId == orderId);
+        if (getOrder != null)
+        {
+            return getOrder;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void CreateOrder(CustomerOrder order)

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
+using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
+using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
 
-namespace sda_onsite_2_csharp_backend_teamwork;
+namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -38,7 +40,7 @@ public class CustomerOrderController : ControllerBase
     public IActionResult CreateOrder(CustomerOrder order)
     {
         _orderService.CreateOrder(order);
-        return CreatedAtAction(nameof(GetOrderById), new { id = order.id }, order);
+        return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order);
     }
 
     [HttpDelete("{id}")]
