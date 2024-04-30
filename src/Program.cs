@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 // using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
+=======
+
+
+using sda_backend_teamwork.src.Abstractions;
+using sda_backend_teamwork.src.Controllers;
+using sda_onsite_2_csharp_backend_teamwork;
+using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
+>>>>>>> 586a288bce31a2defd34695bd625e112a61be1f0
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();// after the builder variable
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -11,7 +23,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 
+builder.Services.AddScoped<IProductService, ProductService>(); //this is the built-in DI container for the Service
+builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is the built-in DI container for the Repository
+
+builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
+
+
 var app = builder.Build();
+app.MapControllers();// Should be added after the app variable
+
+
 
 app.MapControllers();
 
