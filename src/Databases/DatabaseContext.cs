@@ -1,12 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
+
+using Microsoft.AspNetCore.Mvc;
+using sda_backend_teamwork.src.Entities;
+
+namespace sda_backend_teamwork.src.Database
+
 {
-    public class DataBaseContext
+    public class DatabaseContext
     {
+        public List<Product> products;
 
+        public DatabaseContext()
+        {
+            products = [
+            new Product("1", "iPhone 6s", DateTime.Now, 100, "Phone"),
+            new Product("2", "iPhone X", DateTime.Now, 100, "Phone"),
+            new Product("3", "iPhone GX", DateTime.Now, 100, "Phone")
+        ];
+
+        }
+
+       
     }
 }
