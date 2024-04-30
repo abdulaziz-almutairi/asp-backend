@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
-using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
-using sda_onsite_2_csharp_backend_teamwork.src.Services;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 
-namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
+namespace sda_onsite_2_csharp_backend_teamwork;
 
 [ApiController]
 [Route("api/[controller]")]

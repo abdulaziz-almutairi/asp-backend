@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace sda_onsite_2_csharp_backend_teamwork.src;
+namespace sda_onsite_2_csharp_backend_teamwork;
 
 
 public class CustomerOrder

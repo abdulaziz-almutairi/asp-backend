@@ -10,7 +10,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
         public List<Product> findAll();
 
 
-        public Product? findOne(string productId);
+        // public Product? findOne(string productId);
 
 
 
