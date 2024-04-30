@@ -11,7 +11,7 @@ namespace sda_backend_teamwork.src.Controllers
 
         public ProductRepository()
         {
-            _products = new DatabaseContext().products;//wheneve we want to use the product Entities, import the files uplines
+            _products = new DatabaseContext().Products;//wheneve we want to use the product Entities, import the files uplines
         }
 
         public List<Product> findAll()
@@ -19,6 +19,6 @@ namespace sda_backend_teamwork.src.Controllers
             return _products;
         }
 
-       
+
     }
 }
