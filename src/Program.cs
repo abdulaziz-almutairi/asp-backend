@@ -1,7 +1,7 @@
 
 
-using sda_backend_teamwork.src.Abstractions;
-using sda_backend_teamwork.src.Controllers;
+using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 

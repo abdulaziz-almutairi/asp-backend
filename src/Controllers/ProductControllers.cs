@@ -1,10 +1,12 @@
 
 using Microsoft.AspNetCore.Mvc;
-using sda_backend_teamwork.src.Abstractions;
-using sda_backend_teamwork.src.Database;
-using sda_backend_teamwork.src.Entities;
 
-namespace sda_backend_teamwork.src.Controllers
+using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.Database;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+
+namespace sda_onsite_2_csharp_backend_teamwork.srcc.Controllers
+
 {
     [ApiController]
     [Route("api/v1/[controller]")]

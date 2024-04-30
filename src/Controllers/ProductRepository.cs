@@ -1,10 +1,10 @@
 
 using System.Resources;
-using sda_backend_teamwork.src.Abstractions;
-using sda_backend_teamwork.src.Database;
-using sda_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.Database;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
-namespace sda_backend_teamwork.src.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 {
     public class ProductRepository : IProductRepository
     {
@@ -22,12 +22,12 @@ namespace sda_backend_teamwork.src.Controllers
 
         public Product? findOne(string productId) //the implementation from the Repository interface
         {
-           var foundProduct = _products.Find(item => item.Id == productId); 
-           if(foundProduct != null)
-           {
-            return foundProduct; 
-           }
-           return null;
+            var foundProduct = _products.Find(item => item.Id == productId);
+            if (foundProduct != null)
+            {
+                return foundProduct;
+            }
+            return null;
         }
     }
 }
