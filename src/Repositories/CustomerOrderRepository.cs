@@ -18,7 +18,7 @@ public class CustomerOrderRepository : ICustomerOrderRepository
         return _orders;
     }
 
-    public CustomerOrder GetOrderById(int orderId)
+    public CustomerOrder GetOrderById(Guid orderId)
     {
         var getOrder = _orders.FirstOrDefault(order => order.UserId == orderId);
         if (getOrder != null)
@@ -37,7 +37,7 @@ public class CustomerOrderRepository : ICustomerOrderRepository
     }
 
 
-    public void DeleteOrder(int orderId)
+    public void DeleteOrder(Guid orderId)
     {
         var existingOrder = GetOrderById(orderId);
         if (existingOrder != null)

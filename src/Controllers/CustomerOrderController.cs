@@ -23,7 +23,7 @@ public class CustomerOrderController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetOrderById(int id)
+    public IActionResult GetOrderById(Guid id)
     {
         var order = _orderService.GetOrderById(id);
         if (order == null)
@@ -42,7 +42,7 @@ public class CustomerOrderController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteOrder(int id)
+    public IActionResult DeleteOrder(Guid id)
     {
         _orderService.DeleteOrder(id);
         return NoContent();
