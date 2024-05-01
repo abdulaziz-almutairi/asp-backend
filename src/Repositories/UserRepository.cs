@@ -9,7 +9,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
         private List<User> _users;
         public UserRepository()
         {
-            _users = new DatabaseContext().users;
+            // _users = databaseContext.;
         }
 
         public List<User> FindAll()
