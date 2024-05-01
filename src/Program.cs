@@ -1,7 +1,9 @@
 
 
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
+using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,11 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is the built-in DI container for the Repository
 
 // builder.Services.AddScoped<ICustomerOrderRepository, ICustomerOrderRepository>();
+
+
+
+
+builder.Services.AddDbContext<DatabaseContext>(); // For the database context
 
 
 var app = builder.Build();

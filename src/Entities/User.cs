@@ -3,7 +3,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 public class User
 {
-    public User(string id, string first_name, string last_name, string email, string password, int salt, string role)
+    public User(Guid id, string first_name, string last_name, string email, string password, int salt, string role)
     {
         Id = id;
         FirstName = first_name;
@@ -13,7 +13,7 @@ public class User
         Salt = salt;
         Role = role;
     }
-    public string Id { get; set; }
+    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
