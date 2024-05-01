@@ -7,6 +7,7 @@ public class DatabaseContext : DbContext
     public List<Product> Products { get; set; }
     // public DbSet<User> Users { get; set; }
     public DbSet<CustomerOrder> CustomerOrder { get; set; }
+    public DbSet<OrderItem> OrderItem { get; set; }
 
     public DatabaseContext()
     {
@@ -37,7 +38,7 @@ public class DatabaseContext : DbContext
     @"Host=localhost;Username=Root;Password=Password;Datebase=ecommerce"
     */
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=QQAAZZ12341234;Datebase=ecommerce");
+        => optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=1111;Database=ecommerce");
 
 }
 
