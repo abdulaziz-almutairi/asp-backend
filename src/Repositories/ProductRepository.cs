@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
@@ -19,9 +20,30 @@ namespace sda_backend_teamwork.src.Controllers
             return _products;
         }
 
-        // public Product? findOne(string productId)
+        // public Product GetProduct(string productId)
         // {
-        //     throw new NotImplementedException();
+        //     return _products;
         // }
+
+
+
+        // [HttpGet("{productId}")] //Build endpoint for single entity
+        // public Product FindOne(string productId)
+        // {
+
+        //     Console.WriteLine($"This is the id: {productId}");
+
+        // }
+
+
+
+        // [HttpPost("{CreateProducts}")] //Build endpoint for single entity
+        // public ActionResult<List<Product>> CreateOne([FromBody] Product product)
+        // {
+        //     _products.Add(product);
+        //     return _products;
+
+        // }
+
     }
 }

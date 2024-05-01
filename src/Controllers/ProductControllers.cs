@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
@@ -27,21 +28,17 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productService.findAll(); // this to run the method to get all the products
         }
 
-        // [HttpGet("{productId}")] //Build endpoint for single entity
-        // public Product findOne(string productId)
-        // {
 
-        //     Console.WriteLine($"This is the id: {productId}");
-        //    ;
-        // }
 
 
 
         // [HttpPost] //to use this method, import AspNetCore
-        // public List<Product> CreateOne([FromBody] Product product) //this is the body example to send data
+        // public ActionResult CreateOne([FromBody] Product product) //this is the body example to send data
         // {
-        //     _products.Add(product);
-        //     return _products;
+        //     _productService.CreateOne(product);
+        //     return _product;
         // }
+
+
     }
 }

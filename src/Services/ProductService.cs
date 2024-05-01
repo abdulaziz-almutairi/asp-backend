@@ -12,15 +12,16 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             _productRepository = productRepository;
         }
 
+        // public List<Product> CreateOne()
+        // {
+        //     return _productRepository.CreateOne(pr);
+        // }
+
         public List<Product> findAll()
         {
             return _productRepository.findAll();
         }
 
-
-
-
-
-
+        
     }
 }
