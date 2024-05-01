@@ -15,6 +15,19 @@ namespace sda_backend_teamwork.src.Controllers
             _products = new DatabaseContext().Products;//wheneve we want to use the product Entities, import the files uplines
         }
 
+        public Product CreateOne(Product newProduct)
+        {
+            _products.Add(newProduct);
+            return newProduct;
+        }
+
+        public Product? DeleteProduct(string name)
+        {
+            var deleeProduc = _products.FirstOrDefault(product => product.Name == name);
+            _products.Remove(deleeProduc!);
+            return deleeProduc;
+        }
+
         public List<Product> findAll()
         {
             return _products;
