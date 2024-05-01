@@ -12,15 +12,17 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             _productRepository = productRepository;
         }
 
-        public Product CreateOn(Product newProduct)//implemtnt the interace (IProductService)
+
+        public Product CreateOne(Product newProduct)
         {
-            return _productRepository.CreateOne(newProduct);//this is how we talk to the Repository
+            return _productRepository.CreateOne(newProduct);
         }
 
         public Product? DeleteProduct(string name)
         {
             var findProduct = _productRepository.findAll().FirstOrDefault(product => product.Name == name);
-            if (findProduct == null){
+            if (findProduct == null)
+            {
                 return null;
             }
             return _productRepository.DeleteProduct(name);

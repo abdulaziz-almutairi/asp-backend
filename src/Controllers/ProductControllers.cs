@@ -35,12 +35,12 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         [HttpPost] //to use this method, import AspNetCore
         public Product CreateOne([FromBody] Product product) //this is the body example to send data
         {
-            return _productService.CreateOn(product);//this is how we talk to service
+            return _productService.CreateOne(product);//this is how we talk to service
         }
 
         [HttpDelete("{name}")]
         public Product? DeleteProduct(string name)
-        {            
+        {
             return _productService.DeleteProduct(name);
         }
 
