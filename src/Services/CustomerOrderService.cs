@@ -18,7 +18,7 @@ public class CustomerOrderService
         return _repository.GetAllOrders();
     }
 
-    public CustomerOrder GetOrderById(int orderId)
+    public CustomerOrder GetOrderById(Guid orderId)
     {
         return _repository.GetOrderById(orderId);
     }
@@ -27,7 +27,7 @@ public class CustomerOrderService
     {
         _repository.CreateOrder(order);
     }
-    public void DeleteOrder(int orderId)
+    public void DeleteOrder(Guid orderId)
     {
         _repository.DeleteOrder(orderId);
     }

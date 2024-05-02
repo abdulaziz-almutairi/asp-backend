@@ -11,9 +11,9 @@ public class DatabaseContext : DbContext
     // public DatabaseContext()
     // {
     //     Products = [
-    //     new Product("1", "iPhone 6s", DateTime.Now, 100, "Phone"),
-    //     new Product("2", "iPhone X", DateTime.Now, 100, "Phone"),
-    //     new Product("3", "iPhone GX", DateTime.Now, 100, "Phone")
+    //     new Product(new Guid(), "iPhone 6s", DateTime.Now, 100, "Phone"),
+    //     new Product(new Guid(), "iPhone 6s", DateTime.Now, 100, "Phone"),
+    //     new Product(new Guid(), "iPhone 6s", DateTime.Now, 100, "Phone"),
     // ];
     //     users = [
     //     new User("1", "Faisal", "Mohammed", "faisal@faisal.com", "123456", 21, "Admin"),
@@ -24,11 +24,11 @@ public class DatabaseContext : DbContext
 
     // }
 
-    // private IConfiguration _config;
-    // public DatabaseContext(IConfiguration config)
-    // {
-    //     _config = config;
-    // }
+    private IConfiguration _config;
+    public DatabaseContext(IConfiguration config)
+    {
+        _config = config;
+    }
 
 
 
@@ -37,8 +37,10 @@ public class DatabaseContext : DbContext
     @"Host=localhost;Username=Root;Password=Password;Datebase=ecommerce"
     */
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=Password;Datebase=ecommerce");
+        => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Datebase={_config["Db:Database"]}");
 
 }
+
+
 
 

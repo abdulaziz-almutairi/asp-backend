@@ -4,7 +4,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities
 {
     public class Product
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
 
 
@@ -15,7 +15,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities
         public string Category { get; set; }
 
 
-        public Product(string id, string name, DateTime createdAt, int price, string category)
+        public Product(Guid id, string name, DateTime createdAt, int price, string category)
         {
             Id = id;
             Name = name;
