@@ -31,7 +31,7 @@ namespace sda_backend_teamwork.src.Controllers
             return deleeProduct;
         }
 
-        public IEnumerable<Product> findAll()
+        public IEnumerable<Product> FindAll()
         {
             return _products;
         }

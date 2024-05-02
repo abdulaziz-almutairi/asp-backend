@@ -20,7 +20,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 
         public Product? DeleteProduct(Guid productId)
         {
-            Product? findProduct = _productRepository.findAll().FirstOrDefault(product => product.Id == productId);
+            Product? findProduct = _productRepository.FindAll().FirstOrDefault(product => product.Id == productId);
             if (findProduct == null)
             {
                 return null;
@@ -28,11 +28,11 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.DeleteProduct(findProduct);
         }
 
-        public IEnumerable<Product> findAll()
+        public IEnumerable<Product> FindAll()
         {
-            return _productRepository.findAll();
+            return _productRepository.FindAll();
         }
 
-
+      
     }
 }
