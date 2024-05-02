@@ -42,20 +42,10 @@ namespace sda_backend_teamwork.src.Controllers
         // [HttpGet("{productId}")] //Build endpoint for single entity
         // public Product FindOne(string productId)
         // {
-
-        //     Console.WriteLine($"This is the id: {productId}");
-
+        //     throw new NotImplementedException();
         // }
 
 
-
-        // [HttpPost("{CreateProducts}")] //Build endpoint for single entity
-        // public ActionResult<List<Product>> CreateOne([FromBody] Product product)
-        // {
-        //     _products.Add(product);
-        //     return _products;
-
-        // }
 
     }
 }
