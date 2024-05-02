@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
@@ -8,12 +9,15 @@ namespace sda_backend_teamwork.src.Controllers
 {
     public class ProductRepository : IProductRepository
     {
-        private List<Product> _products;//wheneve we want to use the product Entities, import the files uplines
+        private DbSet<Product> _products;//wheneve we want to use the product Entities, import the files uplines
+        private DatabaseContext _databaseContext;
 
-        public ProductRepository()
+        public ProductRepository(DatabaseContext databaseContext)
         {
-            _products = new DatabaseContext().Products;//this is the database 
+            _databaseContext = databaseContext;
+            _products = databaseContext.Products;//this is the database
         }
+
 
         public Product CreateOne(Product newProduct)
         {
@@ -27,7 +31,7 @@ namespace sda_backend_teamwork.src.Controllers
             return deleeProduct;
         }
 
-        public List<Product> findAll()
+        public IEnumerable<Product> findAll()
         {
             return _products;
         }

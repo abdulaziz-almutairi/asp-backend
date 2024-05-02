@@ -22,7 +22,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         }
 
         [HttpGet]
-        public List<Product> findAll()
+        public IEnumerable<Product> findAll()
         {
 
             return _productService.findAll(); // this to run the method to get all the products

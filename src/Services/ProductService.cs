@@ -28,7 +28,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.DeleteProduct(findProduct);
         }
 
-        public List<Product> findAll()
+        public IEnumerable<Product> findAll()
         {
             return _productRepository.findAll();
         }

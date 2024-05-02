@@ -6,7 +6,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
 {
     public interface IProductService
     {
-        public List<Product> findAll();
+        public IEnumerable<Product> findAll();
         public Product CreateOne(Product newProduct);
 
         public Product? DeleteProduct(Guid produtId);
