@@ -38,10 +38,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productService.CreateOne(product);//this is how we talk to service
         }
 
-        [HttpDelete("{name}")]
-        public Product? DeleteProduct(string name)
+        [HttpDelete(":{productId}")]
+        public Product? DeleteProduct(Guid productId)
         {
-            return _productService.DeleteProduct(name);
+            return _productService.DeleteProduct(productId);
         }
 
 

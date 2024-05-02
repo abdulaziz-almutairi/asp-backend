@@ -18,14 +18,14 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.CreateOne(newProduct);
         }
 
-        public Product? DeleteProduct(string name)
+        public Product? DeleteProduct(Guid productId)
         {
-            var findProduct = _productRepository.findAll().FirstOrDefault(product => product.Name == name);
+            Product? findProduct = _productRepository.findAll().FirstOrDefault(product => product.Id == productId);
             if (findProduct == null)
             {
                 return null;
             }
-            return _productRepository.DeleteProduct(name);
+            return _productRepository.DeleteProduct(findProduct);
         }
 
         public List<Product> findAll()

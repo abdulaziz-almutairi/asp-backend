@@ -11,7 +11,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
         // CustomerOrder GetOrderById(int orderId);
         public Product CreateOne(Product newProduct);
 
-        public Product? DeleteProduct(string name);
+        public Product? DeleteProduct(Product deleeProduct);
 
 
 

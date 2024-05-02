@@ -12,7 +12,7 @@ namespace sda_backend_teamwork.src.Controllers
 
         public ProductRepository()
         {
-            _products = new DatabaseContext().Products;//wheneve we want to use the product Entities, import the files uplines
+            _products = new DatabaseContext().Products;//this is the database 
         }
 
         public Product CreateOne(Product newProduct)
@@ -21,11 +21,10 @@ namespace sda_backend_teamwork.src.Controllers
             return newProduct;
         }
 
-        public Product? DeleteProduct(string name)
+        public Product? DeleteProduct(Product deleeProduct)
         {
-            var deleeProduc = _products.FirstOrDefault(product => product.Name == name);
-            _products.Remove(deleeProduc!);
-            return deleeProduc;
+            _products.Remove(deleeProduct);
+            return deleeProduct;
         }
 
         public List<Product> findAll()

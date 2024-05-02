@@ -12,9 +12,9 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         public DatabaseContext()
         {
             Products = [
-            new Product("1", "iPhone 6s", DateTime.Now, 100, "Phone"),
-            new Product("2", "iPhone X", DateTime.Now, 100, "Phone"),
-            new Product("3", "iPhone GX", DateTime.Now, 100, "Phone")
+            new Product("iPhone 6s", DateTime.Now, 100, "Phone"),
+            new Product("iPhone X", DateTime.Now, 100, "Phone"),
+            new Product( "iPhone GX", DateTime.Now, 100, "Phone")
         ];
 
         }
