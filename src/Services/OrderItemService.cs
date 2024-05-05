@@ -23,5 +23,13 @@ public class OrderItemService : IOrderItemService
         return _orderItemRepository.GetAll().ToList();
     }
 
+    public OrderItem GetOrderById(Guid orderId)
+    {
+        return _orderItemRepository.GetOrderById(orderId);
+    }
+    public OrderItem CreateOne(OrderItem newOrder)
+    {
+        return _orderItemRepository.CreateOne(newOrder);
+    }
 
 }

@@ -47,6 +47,31 @@ namespace Backend.Migrations
                     b.ToTable("CustomerOrder");
                 });
 
+            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -66,7 +91,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderItem");
+                    b.ToTable("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

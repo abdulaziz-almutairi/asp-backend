@@ -25,4 +25,9 @@ public class OrderItemsController : BaseController
         var orderItems = _orderItemService.GetOrderItems();
         return Ok(orderItems);
     }
+    [HttpPost]
+    public OrderItem CreateOne([FromBody] OrderItem order)
+    {
+        return _orderItemService.CreateOne(order);
+    }
 }

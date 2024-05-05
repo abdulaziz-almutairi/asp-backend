@@ -17,7 +17,7 @@ public class OrderItemRepository : IOrderItemRepository
     public OrderItemRepository(DatabaseContext databaseContext)
     {
         _databaseContext = databaseContext;
-        _orderItems = databaseContext.OrderItem;
+        _orderItems = databaseContext.OrderItems;
     }
 
     public IEnumerable<OrderItem> GetAll()
@@ -28,6 +28,18 @@ public class OrderItemRepository : IOrderItemRepository
     {
         return _orderItems.Find(orderId);
     }
+    //
+    // public orderitem CreateOrder(orderitem NewOrderItem)
+    // {
+    //         _orderItems.Add(NewOrderItem);
+    //         return NewOrderItem;
+    //     }
+    //
+    public OrderItem CreateOne(OrderItem newOrder)
+    {
+        _orderItems.Add(newOrder);
+        _databaseContext.SaveChanges();
+        return newOrder;
 
-
+    }
 }
