@@ -3,6 +3,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 {
+
     public class DatabaseContext : DbContext
     {
         public DbSet<Order> Orders { get; set; }
@@ -16,17 +17,17 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         {
             _config = config;
 
-
-            //     Products = [
-            //     new Product("1","23","Iphone", "2000"),
-            //     new Product("2","24","MacBook", "5000"),
-            // ];
-
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Database={_config["Db:Database"]}")
-                        .UseSnakeCaseNamingConvention();
+    /*
+    Please Note u need to cheange the Pgadmin Password on appsettings.json file 
+    */
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Datebase={_config["Db:Database"]}")
+        .UseSnakeCaseNamingConvention();
+
+}
 
     }
-}
+
+
