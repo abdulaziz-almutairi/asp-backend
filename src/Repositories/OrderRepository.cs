@@ -46,9 +46,27 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
             _orderItems.Remove(deleteOrder!);
             _DbSet.SaveChanges();
 
-            return deleteOrder(Orderr);
+            return DeleteOne(orderId);
         }
 
+        IEnumerable<Order> IOrderRepository.FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
+        Order? IOrderRepository.FindOne(Guid orderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order CreateOne(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        Order? IOrderRepository.DeleteOne(Guid orderId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
