@@ -8,7 +8,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
-        public List<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         private IConfiguration _config;
@@ -19,15 +19,15 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 
         }
 
-    /*
-    Please Note u need to cheange the Pgadmin Password on appsettings.json file 
-    */
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Datebase={_config["Db:Database"]}")
-        .UseSnakeCaseNamingConvention();
-
-}
+        /*
+        Please Note u need to cheange the Pgadmin Password on appsettings.json file 
+        */
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Datebase={_config["Db:Database"]}")
+            .UseSnakeCaseNamingConvention();
 
     }
+
+}
 
 
