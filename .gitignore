@@ -3,5 +3,6 @@
 bin
 obj
 *.http
+Nuget.config
 *.xml
 appsettings.json

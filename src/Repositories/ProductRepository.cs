@@ -9,13 +9,14 @@ namespace sda_backend_teamwork.src.Controllers
 {
     public class ProductRepository : IProductRepository
     {
-        private DbSet<Product> _products;//wheneve we want to use the product Entities, import the files uplines
+
         private DatabaseContext _databaseContext;
+        private DbSet<Product> _products;//wheneve we want to use the product Entities, import the files uplines
 
         public ProductRepository(DatabaseContext databaseContext)
         {
+            _products = databaseContext.Products;//wheneve we want to use the product Entities, import the files uplines
             _databaseContext = databaseContext;
-            _products = databaseContext.Products;//this is the database
         }
 
 
@@ -33,22 +34,8 @@ namespace sda_backend_teamwork.src.Controllers
 
         public IEnumerable<Product> FindAll()
         {
-            return _products;
+            return _products.ToList();
         }
-
-        // public Product GetProduct(string productId)
-        // {
-        //     return _products;
-        // }
-
-
-
-        // [HttpGet("{productId}")] //Build endpoint for single entity
-        // public Product FindOne(string productId)
-        // {
-        //     throw new NotImplementedException();
-        // }
-
 
 
     }
