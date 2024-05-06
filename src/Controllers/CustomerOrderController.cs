@@ -1,16 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 
 namespace sda_onsite_2_csharp_backend_teamwork;
 
-[ApiController]
-[Route("api/[controller]")]
-public class CustomerOrderController : ControllerBase
-{
-    private readonly CustomerOrderService _orderService;
 
-    public CustomerOrderController(CustomerOrderService orderService)
+public class CustomerOrderController : CostumeController
+{
+    private readonly ICustomerOrederService _orderService;
+
+    public CustomerOrderController(ICustomerOrederService orderService)
     {
         _orderService = orderService;
     }

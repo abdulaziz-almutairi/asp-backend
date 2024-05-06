@@ -1,33 +1,66 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.services;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
-namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
-public class OrderItemsController : BaseController
+namespace sda_onsite_2_csharp_backend_teamwork.src
 {
-    private readonly IOrderItemService _orderItemService;
+    public class OrderItemController : CostumeController
+    {
+        private IOrderItemService _orderItemService;
 
-    public OrderItemsController(IOrderItemService orderItemService)
-    {
-        _orderItemService = orderItemService;
-    }
+        public OrderItemController(IOrderItemService orderItemService)
+        {
+            _orderItemService = orderItemService;
+        }
 
-    [HttpGet]
-    public ActionResult<List<OrderItem>> GetOrderItems()
-    {
-        var orderItems = _orderItemService.GetOrderItems();
-        return Ok(orderItems);
-    }
-    [HttpPost]
-    public OrderItem CreateOne([FromBody] OrderItem order)
-    {
-        return _orderItemService.CreateOne(order);
+        [HttpGet]
+
+        public IEnumerable<OrderItem> FindAll()
+        {
+            return _orderItemService.FindAll();
+
+        }
+        [HttpGet("{OrderItemId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
+        public ActionResult<OrderItem?> FindOne(Guid orderItemId)
+        {
+            return _orderItemService.FindOne(orderItemId);
+
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<OrderItem> CreateOne([FromBody] OrderItem orderItem)
+        {
+
+            if (orderItem != null)
+            {
+
+                var createdOrder = _orderItemService.CreateOne(orderItem);
+                return CreatedAtAction(nameof(CreateOne), createdOrder);
+            }
+
+            return BadRequest();
+
+        }
+        [HttpDelete("{orderItemId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+
+        public ActionResult<OrderItem?> DeleteOne(Guid orderItemId)
+        {
+            NoContent();
+            return _orderItemService.DeleteOne(orderItemId);
+
+        }
+
+
+
     }
 }

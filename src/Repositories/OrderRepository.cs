@@ -5,6 +5,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
+
 namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
 {
     public class OrderRepository : IOrderRepository
@@ -46,9 +47,27 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
             _orderItems.Remove(deleteOrder!);
             _DbSet.SaveChanges();
 
-            return true;
+            return DeleteOne(orderId);
         }
 
+        IEnumerable<Order> IOrderRepository.FindAll()
+        {
+            throw new NotImplementedException();
+        }
 
+        Order? IOrderRepository.FindOne(Guid orderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order CreateOne(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        Order? IOrderRepository.DeleteOne(Guid orderId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

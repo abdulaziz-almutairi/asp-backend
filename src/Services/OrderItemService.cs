@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.services;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Services;
@@ -32,4 +33,18 @@ public class OrderItemService : IOrderItemService
         return _orderItemRepository.CreateOne(newOrder);
     }
 
+    public IEnumerable<Order> FindAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public ActionResult<Order?> FindOne(Guid orderId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ActionResult<OrderItem?> DeleteOne(Guid orderId)
+    {
+        throw new NotImplementedException();
+    }
 }

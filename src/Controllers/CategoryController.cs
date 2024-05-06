@@ -6,7 +6,7 @@ using sdaonsite_2_csharp_backend_teamwork.src.Services;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controller
 {
-    public class CategoryController : BaseController
+    public class CategoryController : CostumeController
     {
         private ICategoryService _categoryService;
 
