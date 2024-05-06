@@ -40,13 +40,13 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
             return newOrder;
         }
 
-        public OrderItem? DeleteOne(Guid orderId)
+        public bool DeleteOne(Guid orderId)
         {
             var deleteOrder = FindOne(orderId);
             _orderItems.Remove(deleteOrder!);
             _DbSet.SaveChanges();
 
-            return deleteOrder(Orderr);
+            return true;
         }
 
 

@@ -9,10 +9,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
 {
     public interface IOrderRepository
     {
-        public IEnumerable<Order> FindAll();
-        public Order? FindOne(Guid orderId);
-        public Order CreateOne(Order order);
-        public Order? DeleteOne(Guid orderId);
+        public IEnumerable<OrderItem> FindAll();
+        public OrderItem? FindOne(Guid orderId);
+        public OrderItem CreateOne(OrderItem newOrder);
+        public bool DeleteOne(Guid orderId);
 
 
     }
