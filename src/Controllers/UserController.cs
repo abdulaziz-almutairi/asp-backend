@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
@@ -22,13 +23,13 @@ public class UserController : CostumeController
     }
 
     [HttpGet]
-    public List<User> FindAll()
+    public List<UserReadDto> FindAll()
     {
         return _userService.FindAll();
     }
 
     [HttpGet("{email}")]
-    public User? FindOne(string email)
+    public UserReadDto? FindOne(string email)
     {
         return _userService.FindOneByEmail(email);
     }
