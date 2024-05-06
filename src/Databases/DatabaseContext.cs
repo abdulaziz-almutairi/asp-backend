@@ -25,7 +25,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         Please Note u need to cheange the Pgadmin Password on appsettings.json file 
         */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Datebase={_config["Db:Database"]}")
+            => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Database={_config["Db:Database"]}")
             .UseSnakeCaseNamingConvention();
 
     }

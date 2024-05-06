@@ -3,11 +3,11 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 public class User
 {
-    public User(Guid id, string first_name, string last_name, string email, string password, int salt, string role)
+    public User(Guid id, string firstName, string lastName, string email, string password, int salt, string role)
     {
         Id = id;
-        FirstName = first_name;
-        LastName = last_name;
+        FirstName = firstName;
+        LastName = lastName;
         Email = email;
         Password = password;
         Salt = salt;

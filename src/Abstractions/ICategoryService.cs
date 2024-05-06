@@ -1,7 +1,9 @@
 
+// using sda_nsite_2_csharp_backend_teamwork.src.DTOs;x
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
-namespace sdaonsite_2_csharp_backend_teamwork.src.Services
+namespace sda_onsite_2_csharp_backend_teamwork.src.Services
 {
     public interface ICategoryService
     {
