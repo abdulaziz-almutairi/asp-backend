@@ -10,7 +10,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.services;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
-public class OrderItemsController : BaseController
+public class OrderItemsController : CostumeController
 {
     private readonly IOrderItemService _orderItemService;
 

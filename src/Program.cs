@@ -20,6 +20,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+
+builder.Services.AddScoped<IUserService, UserService>(); //this is the built-in DI container for the Service
+builder.Services.AddScoped<IUserRepository, UserRepository>(); //this is the built-in DI container for the Repository
+
 builder.Services.AddScoped<IProductService, ProductService>(); //this is the built-in DI container for the Service
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is the built-in DI container for the Repository
 
@@ -27,7 +31,7 @@ builder.Services.AddScoped<IOrderItemService, OrderItemService>(); //this is the
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>(); //this is the built-in DI container for the Repository
 
 
-builder.Services.AddScoped<ICustomerOrederService, CustomerOrderService>();
+builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
 builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 
 

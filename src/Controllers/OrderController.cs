@@ -9,7 +9,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Services;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src
 {
-    public class OrderController : BaseController
+    public class OrderController : CostumeController
     {
         private IOrderItemService _orderService;
 

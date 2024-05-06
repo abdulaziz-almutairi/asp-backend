@@ -1,17 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
+using Microsoft.EntityFrameworkCore;
 namespace sda_onsite_2_csharp_backend_teamwork;
 
 
 public class CustomerOrderRepository : ICustomerOrderRepository
 {
-    private List<CustomerOrder> _orders;
+    // private List<CustomerOrder> _orders;
+    private DatabaseContext _databaseContext;
+    private DbSet<CustomerOrder> _orders;
 
-    public CustomerOrderRepository()
+    public CustomerOrderRepository(DatabaseContext databaseContext)
     {
-        _orders = new List<CustomerOrder>();
+        _orders = databaseContext.CustomerOrders;
+        _databaseContext = databaseContext;
     }
+    // public CustomerOrderRepository()
+    // {
+    //     _orders = new List<CustomerOrder>();
+    // }
 
     public IEnumerable<CustomerOrder> GetAllOrders()
     {
