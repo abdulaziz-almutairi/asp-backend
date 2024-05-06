@@ -23,7 +23,7 @@ public class UserController : CostumeController
     }
 
     [HttpGet]
-    public List<User> FindAll()
+    public List<UserReadDto> FindAll()
     {
         return _userService.FindAll();
     }

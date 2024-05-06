@@ -38,15 +38,17 @@ public class UserService : IUserService
         return _userRepository.CreateOne(user);
     }
 
-    public List<User> FindAll()
+    public List<UserReadDto> FindAll()
     {
-        return _userRepository.FindAll();
+        var users = _userRepository.FindAll();
+        var usersRead = users.Select(_mapper.Map<UserReadDto>);
+        return usersRead.ToList();
     }
 
     public UserReadDto? FindOneByEmail(string email)
     {
-        var user = _userRepository.FindOneByEmail(email);
-        var userRead = _mapper.Map<UserReadDto>(user);
+        User? user = _userRepository.FindOneByEmail(email);
+        UserReadDto? userRead = _mapper.Map<UserReadDto>(user);
         return userRead;
     }
 
