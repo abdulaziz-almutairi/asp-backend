@@ -9,9 +9,9 @@ namespace sda_onsite_2_csharp_backend_teamwork;
 
 public class CustomerOrderController : CostumeController
 {
-    private readonly ICustomerOrederService _orderService;
+    private readonly ICustomerOrderService _orderService;
 
-    public CustomerOrderController(ICustomerOrederService orderService)
+    public CustomerOrderController(ICustomerOrderService orderService)
     {
         _orderService = orderService;
     }

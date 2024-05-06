@@ -15,12 +15,12 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities
         public Category Category { get; set; }
         public Guid CategoryId { get; set; }
 
-        public Product( string name, DateTime createdAt, int price, string category)
+        public Product(string name, DateTime createdAt, int price, Guid categoryId)
         {
             Name = name;
             CreatedAt = createdAt;
             Price = price;
-            Category = category;
+            CategoryId = categoryId;
         }
 
     }
