@@ -11,6 +11,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();// after the builder variable
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 // Add services to the container.
