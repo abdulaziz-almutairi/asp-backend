@@ -5,7 +5,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 
 namespace sda_onsite_2_csharp_backend_teamwork;
 
-public class CustomerOrderService : ICustomerOrederService
+public class CustomerOrderService : ICustomerOrderService
 {
     private readonly ICustomerOrderRepository _repository;
 

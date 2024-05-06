@@ -11,6 +11,8 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
         private IConfiguration _config;
 
         public DatabaseContext(IConfiguration config)

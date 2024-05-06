@@ -2,7 +2,7 @@
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 
-public interface ICustomerOrederService
+public interface ICustomerOrderService
 {
     public IEnumerable<CustomerOrder> GetAllOrders();
     public CustomerOrder GetOrderById(Guid orderId);
