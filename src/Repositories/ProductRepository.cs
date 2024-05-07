@@ -25,6 +25,7 @@ namespace sda_backend_teamwork.src.Controllers
         public Product CreateOne(Product newProduct)
         {
             _products.Add(newProduct);
+            _databaseContext.SaveChanges();
             return newProduct;
         }
 
