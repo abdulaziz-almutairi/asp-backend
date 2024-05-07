@@ -29,9 +29,10 @@ public class UserController : CostumeController
     }
 
     [HttpGet("{email}")]
-    public UserReadDto? FindOne(string email)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<UserReadDto?> FindOne(string email)
     {
-        return _userService.FindOneByEmail(email);
+        return Ok(_userService.FindOneByEmail(email));
     }
 
     [HttpPost]

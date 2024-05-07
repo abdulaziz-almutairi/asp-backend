@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
@@ -6,13 +7,13 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private List<User> _users;
-        public UserRepository()
+        private DbSet<User> _users;
+        public UserRepository(DatabaseContext databaseContext)
         {
-            // _users = databaseContext.;
+            _users = databaseContext.Users;
         }
 
-        public List<User> FindAll()
+        public IEnumerable<User> FindAll()
         {
             return _users;
         }
@@ -30,15 +31,15 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
 
         public User UpdateOne(User updatedUser)
         {
-            var users = _users.Select(user =>
-             {
-                 if (user.Email == updatedUser.Email)
-                 {
-                     return updatedUser;
-                 }
-                 return user;
-             });
-            _users = users.ToList();
+            // var users = _users.Select(user =>
+            //  {
+            //      if (user.Email == updatedUser.Email)
+            //      {
+            //          return updatedUser;
+            //      }
+            //      return user;
+            //  });
+            // _users = users;
 
             return updatedUser;
         }

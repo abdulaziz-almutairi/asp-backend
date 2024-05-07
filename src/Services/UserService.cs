@@ -40,10 +40,18 @@ public class UserService : IUserService
 
     public List<UserReadDto> FindAll()
     {
-        var users = _userRepository.FindAll();
+        IEnumerable<User> users = _userRepository.FindAll();
         var usersRead = users.Select(_mapper.Map<UserReadDto>);
         return usersRead.ToList();
     }
+
+    // public List<UserReadDto> FindAll()
+    // {
+    //     IEnumerable<User> users = _userRepository.FindAll();
+    //     var usersRead = users.Select(_mapper.Map<UserReadDto>);
+    //     return usersRead.ToList();
+    // }
+
 
     public UserReadDto? FindOneByEmail(string email)
     {
