@@ -1,5 +1,8 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
@@ -22,7 +25,46 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public User? CreateOne(User user)
+    public string SignIn(UserSignInDto userSign)
+    {
+        /*
+        1. find the user
+        2. if there is no user return null (for bad request)
+        3. compare passwords
+        4. if true return userRead
+        5. if false return null
+        */
+
+        User? user = _userRepository.FindOneByEmail(userSign.Email);
+        if (user is null) return null;
+
+        byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
+
+        bool isCorrectPass = PasswordUtils.VerifyPassword(userSign.Password, user.Password, pepper);
+        if (!isCorrectPass) return null;
+
+        var claims = new[]
+             {
+            new Claim(ClaimTypes.Name, user.FirstName),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
+            new Claim(ClaimTypes.Email, user.Email)
+        };
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _config["Jwt:Issuer"],
+            audience: _config["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddDays(7),
+            signingCredentials: creds
+        );
+
+        var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+        return tokenString;
+    }
+    public UserReadDto? SignUp(UserCreateDto user)
     {
         User? foundUser = _userRepository.FindOneByEmail(user.Email);
 
@@ -30,29 +72,31 @@ public class UserService : IUserService
         {
             return null;
         }
+
         byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]!);
 
         PasswordUtils.HashPassword(user.Password, out string hashedPassword, pepper);
 
         user.Password = hashedPassword;
-        return _userRepository.CreateOne(user);
+        User mappedUser = _mapper.Map<User>(user);
+
+        User newUser = _userRepository.CreateOne(mappedUser);
+
+        UserReadDto userRead = _mapper.Map<UserReadDto>(newUser);
+
+        return userRead;
+
+
     }
 
     public List<UserReadDto> FindAll()
     {
-        IEnumerable<User> users = _userRepository.FindAll();
+        var users = _userRepository.FindAll();
+        // this or that
+        //var usersRead = users.Select(user => _mapper.Map<UserReadDto>(user));
         var usersRead = users.Select(_mapper.Map<UserReadDto>);
         return usersRead.ToList();
     }
-
-    // public List<UserReadDto> FindAll()
-    // {
-    //     IEnumerable<User> users = _userRepository.FindAll();
-    //     var usersRead = users.Select(_mapper.Map<UserReadDto>);
-    //     return usersRead.ToList();
-    // }
-
-
     public UserReadDto? FindOneByEmail(string email)
     {
         User? user = _userRepository.FindOneByEmail(email);
@@ -66,10 +110,10 @@ public class UserService : IUserService
         if (user is not null)
         {
             user.FirstName = newValue.FirstName;
+            user.LastName = newValue.LastName;
             return _userRepository.UpdateOne(user);
         }
         return null;
     }
-
 
 }
