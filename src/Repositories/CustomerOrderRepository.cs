@@ -42,6 +42,7 @@ public class CustomerOrderRepository : ICustomerOrderRepository
     public void CreateOrder(CustomerOrder order)
     {
         _orders.Add(order);
+        _databaseContext.SaveChanges();
     }
 
 
@@ -51,6 +52,7 @@ public class CustomerOrderRepository : ICustomerOrderRepository
         if (existingOrder != null)
         {
             _orders.Remove(existingOrder);
+            _databaseContext.SaveChanges();
         }
     }
 }

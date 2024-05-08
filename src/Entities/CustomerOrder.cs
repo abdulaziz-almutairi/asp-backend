@@ -9,7 +9,7 @@ public class CustomerOrder
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateTime Date { get; set; } = DateTime.Now;
     public string Status { get; set; }
     public string Address { get; set; }
 
