@@ -1,5 +1,7 @@
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
+using AutoMapper;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 {
@@ -7,15 +9,24 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
     {
         private IProductRepository _productRepository;
 
-        public ProductService(IProductRepository productRepository)
+        private IProductRepository _categoryRepository;
+        private IMapper _mapper;
+
+
+
+        public ProductService(IProductRepository productRepository, IMapper mapper)
         {
+            _mapper = mapper;
             _productRepository = productRepository;
         }
 
 
-        public Product CreateOne(Product newProduct)
+        public Product CreateOne(ProductCreateDto newProduct)
         {
-            return _productRepository.CreateOne(newProduct);
+            // Category? mappedCategory = _mapper.Map<Category>(category);
+
+            Product? mappedProduct = _mapper.Map<Product>(newProduct);
+            return _productRepository.CreateOne(mappedProduct);
         }
 
         public Product? DeleteProduct(Guid productId)
@@ -33,6 +44,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.FindAll();
         }
 
-      
+
     }
 }

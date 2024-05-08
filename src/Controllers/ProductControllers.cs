@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
@@ -32,10 +33,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
 
 
 
-        [HttpPost] //to use this method, import AspNetCore
-        public Product CreateOne([FromBody] Product product) //this is the body example to send data
+        [HttpPost ] //to use this method, import AspNetCore
+        public Product CreateOne([FromBody] ProductCreateDto productCreateDto) //this is the body example to send data
         {
-            return _productService.CreateOne(product);//this is how we talk to service
+            return _productService.CreateOne(productCreateDto);//this is how we talk to service
         }
 
         [HttpDelete(":{productId}")]

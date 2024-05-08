@@ -36,16 +36,12 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //this is
 builder.Services.AddScoped<ICategoryService, CategoryService>(); //this is the built-in DI container for the Repository
 
 
-
-
 // builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
 builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 
-
-
-
 builder.Services.AddDbContext<DatabaseContext>(); // For the database context
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
 app.MapControllers();// Should be added after the app variable
