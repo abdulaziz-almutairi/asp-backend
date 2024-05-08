@@ -25,12 +25,14 @@ namespace sda_backend_teamwork.src.Controllers
         public Product CreateOne(Product newProduct)
         {
             _products.Add(newProduct);
+            _databaseContext.SaveChanges();
             return newProduct;
         }
 
         public Product? DeleteProduct(Product deleeProduct)
         {
             _products.Remove(deleeProduct);
+            _databaseContext.SaveChanges();
             return deleeProduct;
         }
 

@@ -16,7 +16,10 @@ public class Mapper : Profile
         CreateMap<UserReadDto, User>();
 
         CreateMap<CategoryCreateDto, Category>();
+
         CreateMap<UserCreateDto, User>();
+
+        CreateMap<ProductCreateDto, Product>();
     }
 
 }
