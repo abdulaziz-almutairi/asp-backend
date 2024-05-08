@@ -11,9 +11,9 @@ namespace sda_onsite_2_csharp_backend_teamwork.src
 {
     public class OrderController : CostumeController
     {
-        private IOrderItemService _orderService;
+        private IOrderService _orderService;
 
-        public OrderController(IOrderItemService orderService)
+        public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
         }
@@ -37,7 +37,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<OrderItem> CreateOne([FromBody] OrderItem order)
+        public ActionResult<Order> CreateOne([FromBody] Order order)
         {
 
             if (order != null)
@@ -50,17 +50,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src
             return BadRequest();
 
         }
-        [HttpDelete("{orderId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-
-        public ActionResult<OrderItem?> DeleteOne(Guid orderId)
-        {
-            NoContent();
-            return _orderService.DeleteOne(orderId);
-
-        }
-
-
 
     }
 }

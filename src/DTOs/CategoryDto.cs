@@ -2,5 +2,5 @@
 namespace sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 public class CategoryCreateDto
 {
-    public string Type { get; set; }
+    public string Name { get; set; }
 }

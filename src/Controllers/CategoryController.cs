@@ -35,15 +35,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controller
             return BadRequest();
         }
 
-        private ActionResult<Category> BadRequest()
-        {
-            throw new NotImplementedException();
-        }
-
-        private ActionResult<Category> CreatedAtAction(string v, object createdCategory)
-        {
-            throw new NotImplementedException();
-        }
 
         [HttpGet("{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

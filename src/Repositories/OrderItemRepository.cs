@@ -20,21 +20,15 @@ public class OrderItemRepository : IOrderItemRepository
         _orderItems = databaseContext.OrderItems;
     }
 
-    public IEnumerable<OrderItem> GetAll()
+    public IEnumerable<OrderItem> FindAll()
     {
         return _orderItems;
     }
-    public OrderItem? GetOrderById(Guid orderId)
+    public OrderItem? FindOne(Guid orderId)
     {
         return _orderItems.Find(orderId);
     }
-    //
-    // public orderitem CreateOrder(orderitem NewOrderItem)
-    // {
-    //         _orderItems.Add(NewOrderItem);
-    //         return NewOrderItem;
-    //     }
-    //
+
     public OrderItem CreateOne(OrderItem newOrder)
     {
         _orderItems.Add(newOrder);

@@ -1,6 +1,7 @@
 using sda_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.Controller;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
@@ -28,6 +29,13 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is t
 
 builder.Services.AddScoped<IOrderItemService, OrderItemService>(); //this is the built-in DI container for the Service
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>(); //this is the built-in DI container for the Repository
+builder.Services.AddScoped<IOrderService, OrderServices>(); //this is the built-in DI container for the Service
+builder.Services.AddScoped<IOrderRepository, OrderRepository>(); //this is the built-in DI container for the Repository
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //this is the built-in DI container for the Service
+builder.Services.AddScoped<ICategoryService, CategoryService>(); //this is the built-in DI container for the Repository
+
+
 
 
 builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
