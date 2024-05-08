@@ -30,4 +30,5 @@ public class User
     public string Password { get; set; }
     public int Salt { get; set; }
     public Role Role { get; set; } = Role.Customer;
+    public IEnumerable<Order>? Order { get; set; }
 }
