@@ -40,19 +40,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Services
 
         }
 
-        public Order? DeleteOne(Guid OrderId)
-        {
-            var deleteOrder = _orderRepository.FindOne(OrderId);
-            if (deleteOrder == null)
-            {
-                return null;
-            }
-            else
-            {
-                return _orderRepository.DeleteOne(OrderId);
-            }
 
-
-        }
     }
 }

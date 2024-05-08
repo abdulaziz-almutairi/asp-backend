@@ -12,8 +12,6 @@ public interface IOrderItemService
 {
     public OrderItem CreateOne(OrderItem orderItem);
     public IEnumerable<OrderItem> FindAll();
-    public ActionResult<OrderItem?> FindOne(Guid orderItemId);
-    public ActionResult<OrderItem?> DeleteOne(Guid orderItemId);
-    public OrderItem? UpdateOne(Guid orderItemId, OrderItem newValue);
+    public OrderItem? FindOne(Guid orderItemId);
 
 }

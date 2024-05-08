@@ -50,15 +50,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src
             return BadRequest();
 
         }
-        [HttpDelete("{orderItemId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
 
-        public ActionResult<OrderItem?> DeleteOne(Guid orderItemId)
-        {
-            NoContent();
-            return _orderItemService.DeleteOne(orderItemId);
-
-        }
 
 
 

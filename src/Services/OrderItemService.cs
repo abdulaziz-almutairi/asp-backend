@@ -19,32 +19,19 @@ public class OrderItemService : IOrderItemService
         _orderItemRepository = orderItemRepository;
     }
 
-    public List<OrderItem> GetOrderItems()
+    public IEnumerable<OrderItem> FindAll()
     {
-        return _orderItemRepository.GetAll().ToList();
+        return _orderItemRepository.FindAll();
     }
 
-    public OrderItem GetOrderById(Guid orderId)
+    public OrderItem? FindOne(Guid orderId)
     {
-        return _orderItemRepository.GetOrderById(orderId);
+        return _orderItemRepository.FindOne(orderId);
     }
     public OrderItem CreateOne(OrderItem newOrder)
     {
         return _orderItemRepository.CreateOne(newOrder);
     }
 
-    public IEnumerable<Order> FindAll()
-    {
-        throw new NotImplementedException();
-    }
 
-    public ActionResult<Order?> FindOne(Guid orderId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public ActionResult<OrderItem?> DeleteOne(Guid orderId)
-    {
-        throw new NotImplementedException();
-    }
 }
