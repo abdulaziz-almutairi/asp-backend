@@ -32,6 +32,7 @@ namespace sda_backend_teamwork.src.Controllers
         public Product? DeleteProduct(Product deleeProduct)
         {
             _products.Remove(deleeProduct);
+            _databaseContext.SaveChanges();
             return deleeProduct;
         }
 

@@ -9,9 +9,8 @@ using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 namespace sda_onsite_2_csharp_backend_teamwork.src.services;
 public interface IOrderItemService
 {
-    public List<OrderItem> GetOrderItems();
-    public OrderItem CreateOne(OrderItem newOrder);
-    IEnumerable<Order> FindAll();
-    ActionResult<Order?> FindOne(Guid orderId);
-    ActionResult<OrderItem?> DeleteOne(Guid orderId);
+    public OrderItem CreateOne(OrderItem orderItem);
+    public IEnumerable<OrderItem> FindAll();
+    public OrderItem? FindOne(Guid orderItemId);
+
 }

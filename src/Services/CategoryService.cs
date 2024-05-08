@@ -35,11 +35,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controller
 
         public Category? FindOne(Guid categoryId)
         {
-            var findItem = _categoryRepository.FindAll().FirstOrDefault(item => item.Id == categoryId);
-            if (findItem == null)
-            {
-                return null;
-            }
             return _categoryRepository.FindOne(categoryId);
         }
         public Category? DeleteOne(Guid categoryId)
@@ -69,14 +64,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controller
         }
 
 
-        public interface ICategoryService
-        {
-            object CreateOne(CategoryCreateDto category);
-            object DeleteOne(Guid categoryId);
-            object FindAll();
-            object FindOne(Guid categoryId);
-            object UpdateOne(Guid categoryId, Category category);
-        }
+
 
     }
 }

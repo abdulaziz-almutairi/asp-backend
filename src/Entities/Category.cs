@@ -11,6 +11,5 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public IEnumerable<Product> Products { get; set; }
     }
 }
