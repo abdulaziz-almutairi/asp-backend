@@ -8,7 +8,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Entities;
 [Index(nameof(Email), IsUnique = true)]
 public class User
 {
-    private Random rnd = new Random(); // generate salt
+    private Random _rnd = new Random(); // generate salt
     public User(Guid id, string firstName, string lastName, string email, string password, Role role)
     {
         Id = id;
@@ -16,7 +16,7 @@ public class User
         LastName = lastName;
         Email = email;
         Password = password;
-        Salt = rnd.Next(10, 100); ;
+        Salt = _rnd.Next(10, 100);
         Role = role;
     }
 
