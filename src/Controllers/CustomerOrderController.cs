@@ -16,14 +16,14 @@ public class CustomerOrderController : CostumeController
         _orderService = orderService;
     }
 
-    [HttpGet("allOrders")]
+    [HttpGet]
     public IActionResult GetAllOrders()
     {
         var orders = _orderService.GetAllOrders();
         return Ok(orders);
     }
 
-    [HttpGet("getOrders/{id}")]
+    [HttpGet("{id}")]
     public IActionResult GetOrderById(Guid id)
     {
         var order = _orderService.GetOrderById(id);
@@ -35,7 +35,7 @@ public class CustomerOrderController : CostumeController
         return Ok(order);
     }
 
-    [HttpPost("createOrder/")]
+    [HttpPost]
     public IActionResult CreateOrder(CustomerOrder order)
     {
         _orderService.CreateOrder(order);

@@ -25,7 +25,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src
             return _orderItemService.FindAll();
 
         }
-        [HttpGet("{OrderItemId}")]
+        [HttpGet("{orderItemId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
         public ActionResult<OrderItem?> FindOne(Guid orderItemId)

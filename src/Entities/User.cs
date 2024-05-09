@@ -16,7 +16,7 @@ public class User
         LastName = lastName;
         Email = email;
         Password = password;
-        Salt = rnd.Next(10, 100); ;
+        Salt = rnd.Next(10, 100);
         Role = role;
     }
 
