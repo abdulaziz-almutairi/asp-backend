@@ -27,13 +27,6 @@ public class UserService : IUserService
 
     public string SignIn(UserSignInDto userSign)
     {
-        /*
-        1. find the user
-        2. if there is no user return null (for bad request)
-        3. compare passwords
-        4. if true return userRead
-        5. if false return null
-        */
 
         User? user = _userRepository.FindOneByEmail(userSign.Email);
         if (user is null) return null;
@@ -92,8 +85,6 @@ public class UserService : IUserService
     public List<UserReadDto> FindAll()
     {
         var users = _userRepository.FindAll();
-        // this or that
-        //var usersRead = users.Select(user => _mapper.Map<UserReadDto>(user));
         var usersRead = users.Select(_mapper.Map<UserReadDto>);
         return usersRead.ToList();
     }
@@ -102,18 +93,6 @@ public class UserService : IUserService
         User? user = _userRepository.FindOneByEmail(email);
         UserReadDto? userRead = _mapper.Map<UserReadDto>(user);
         return userRead;
-    }
-
-    public User? UpdateOne(string email, User newValue)
-    {
-        User? user = _userRepository.FindOneByEmail(email);
-        if (user is not null)
-        {
-            user.FirstName = newValue.FirstName;
-            user.LastName = newValue.LastName;
-            return _userRepository.UpdateOne(user);
-        }
-        return null;
     }
 
 }

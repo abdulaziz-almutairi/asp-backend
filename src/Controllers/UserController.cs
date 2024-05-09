@@ -16,13 +16,6 @@ public class UserController : CostumeController
         _userService = userService;
     }
 
-
-    [HttpPatch("{email}")]
-    public User? UpdateOne(string email, [FromBody] User user)
-    {
-        return _userService.UpdateOne(email, user);
-    }
-
     [HttpGet]
     [Authorize(Roles = "Admin")]
     public List<UserReadDto> FindAll()

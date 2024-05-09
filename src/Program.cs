@@ -1,3 +1,6 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using sda_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
@@ -12,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();// after the builder variable
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 
 // Add services to the container.
@@ -42,6 +47,22 @@ builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 builder.Services.AddDbContext<DatabaseContext>(); // For the database context
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!))
+        };
+    });
 
 var app = builder.Build();
 app.MapControllers();// Should be added after the app variable
