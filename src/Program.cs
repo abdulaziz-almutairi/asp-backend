@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using sda_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork;
+using sda_onsite_2_csharp_backend_teamwork.src;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Controller;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
@@ -41,7 +42,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //this is
 builder.Services.AddScoped<ICategoryService, CategoryService>(); //this is the built-in DI container for the Repository
 
 
-// builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
+builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
 builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 
 builder.Services.AddDbContext<DatabaseContext>(); // For the database context
