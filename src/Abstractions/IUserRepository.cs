@@ -7,6 +7,6 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
         public IEnumerable<User> FindAll();
         public User CreateOne(User user);
         public User? FindOneByEmail(string email);
-        public User UpdateOne(User updatedUser);
+        // public User UpdateOne(User updatedUser);
     }
 }
