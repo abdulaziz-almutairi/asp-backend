@@ -1,6 +1,8 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using sda_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork;
 using sda_onsite_2_csharp_backend_teamwork.src;
@@ -8,6 +10,7 @@ using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Controller;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
+using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.services;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
@@ -27,6 +30,23 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 
+
+// configuring DB
+var _config = builder.Configuration;
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Database={_config["Db:Database"]};Password={_config["Db:Password"]}");
+dataSourceBuilder.MapEnum<Role>();
+
+var dataSource = dataSourceBuilder.Build();
+builder.Services.AddDbContext<DatabaseContext>((options) =>
+{
+    options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
+});
+
+
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
+
+// Added Services
 builder.Services.AddScoped<IUserService, UserService>(); //this is the built-in DI container for the Service
 builder.Services.AddScoped<IUserRepository, UserRepository>(); //this is the built-in DI container for the Repository
 
@@ -50,6 +70,21 @@ builder.Services.AddDbContext<DatabaseContext>(); // For the database context
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins(builder.Configuration["Cors:Origin"]!)
+                          .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .SetIsOriginAllowed((host) => true)
+                            .AllowCredentials();
+                      });
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -67,6 +102,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 app.MapControllers();// Should be added after the app variable
+
 
 
 
