@@ -35,12 +35,22 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productService.CreateOne(productCreateDto);//this is how we talk to service
         }
 
-        [HttpDelete(":{productId}")]
+        [HttpDelete("{productId}")]
         public Product? DeleteProduct(Guid productId)
         {
             return _productService.DeleteProduct(productId);
         }
 
+        [HttpGet("{productId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<ProductReadDto> FindOne(Guid productId)
+        {
+            ProductReadDto? product = _productService.FindOne(productId);
+            if (product is null) return NotFound();
+
+            return Ok(product);
+        }
 
     }
 }

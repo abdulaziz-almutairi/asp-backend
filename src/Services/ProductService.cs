@@ -43,11 +43,23 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
                 return null;
             }
             return _productRepository.DeleteProduct(findProduct);
+
         }
 
 
 
 
+        public ProductReadDto? FindOne(Guid id)
+        {
+            Product? product = _productRepository.FindOne(id);
+
+            if (product is null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<ProductReadDto>(product);
+        }
 
 
     }
