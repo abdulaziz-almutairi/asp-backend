@@ -1,12 +1,15 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using sda_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork.src.Controller;
 using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
+using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.services;
 using sda_onsite_2_csharp_backend_teamwork.src.Services;
@@ -16,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();// after the builder variable
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true); // this is to lowercase all letters
 
 
 // Add services to the container.
@@ -44,7 +47,17 @@ builder.Services.AddScoped<ICategoryService, CategoryService>(); //this is the b
 // builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
 builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 
-builder.Services.AddDbContext<DatabaseContext>(); // For the database context
+// configuring DB
+var _config = builder.Configuration;
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Database={_config["Db:Database"]};Password={_config["Db:Password"]}");
+dataSourceBuilder.MapEnum<Role>();
+
+var dataSource = dataSourceBuilder.Build();
+builder.Services.AddDbContext<DatabaseContext>((options) =>
+{
+    options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
+});
+
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -64,6 +77,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// ADD Orign & CORS to allow the frontend to talk with this backend
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins(builder.Configuration["Cors:Origin"]!)
+                          .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .SetIsOriginAllowed((host) => true)
+                            .AllowCredentials();
+                      });
+});
+
+
 var app = builder.Build();
 app.MapControllers();// Should be added after the app variable
 
@@ -77,5 +106,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins); //this is to invoke the Cors to access between back-end & front-end
+
 
 app.Run();

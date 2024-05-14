@@ -13,20 +13,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         public DbSet<OrderItem> OrderItems { get; set; }
 
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
-        private IConfiguration _config;
 
-        public DatabaseContext(IConfiguration config)
-        {
-            _config = config;
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { } //database config is now cming from Proram.cs
 
-        }
 
-        /*
-        Please Note u need to cheange the Pgadmin Password on appsettings.json file 
-        */
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Password={_config["Db:Password"]};Database={_config["Db:Database"]}")
-            .UseSnakeCaseNamingConvention();
 
     }
 
