@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 {
@@ -14,8 +15,16 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
 
+ 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { } //database config is now cming from Proram.cs
 
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasPostgresEnum<Role>();
+        }
 
 
     }
