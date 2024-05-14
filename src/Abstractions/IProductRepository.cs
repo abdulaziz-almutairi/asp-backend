@@ -12,9 +12,7 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Abstractions
 
         public Product? DeleteProduct(Product deleeProduct);
 
-        public Product? FindOne(Guid productId);
-
-
+        public Product? FindOne(Guid id);
 
 
 
