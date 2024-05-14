@@ -29,10 +29,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.CreateOne(mappedProduct);
         }
 
-        public IEnumerable<Product> FindAll(int limit, int page)
+        public IEnumerable<Product> FindAll()
         {
 
-            return _productRepository.FindAll(limit, page);
+            return _productRepository.FindAll();
         }
 
         public Product? DeleteProduct(Guid productId)

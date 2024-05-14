@@ -22,10 +22,10 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         // products?limit=5&page=1
 
         [HttpGet]
-        public IEnumerable<Product> FindAll([FromQuery] int limit = 5, [FromQuery] int page = 1)
+        public IEnumerable<Product> FindAll()
         {
 
-            return _productService.FindAll(limit, page); // this to run the method to get all the products
+            return _productService.FindAll(); // this to run the method to get all the products
         }
 
 

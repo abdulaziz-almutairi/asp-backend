@@ -50,11 +50,9 @@ namespace sda_backend_teamwork.src.Controllers
         //     return paginated.ToList();
         // }
 
-        public IEnumerable<Product> FindAll(int limit, int page)
+        public IEnumerable<Product> FindAll()
         {
-            int offset = (page - 1) * limit;
-            var paginated = _products.Skip(offset).Take(limit);
-            return paginated.ToList();
+            return _products;
         }
 
         public Product? FindOne(Guid productId)

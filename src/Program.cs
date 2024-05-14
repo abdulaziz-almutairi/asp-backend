@@ -42,6 +42,7 @@ builder.Services.AddDbContext<DatabaseContext>((options) =>
     options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
 });
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
@@ -55,8 +56,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>(); //this is t
 
 builder.Services.AddScoped<IOrderItemService, OrderItemService>(); //this is the built-in DI container for the Service
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>(); //this is the built-in DI container for the Repository
-builder.Services.AddScoped<IOrderService, OrderServices>(); //this is the built-in DI container for the Service
-builder.Services.AddScoped<IOrderRepository, OrderRepository>(); //this is the built-in DI container for the Repository
+// builder.Services.AddScoped<IOrderService, OrderServices>(); //this is the built-in DI container for the Service
+// builder.Services.AddScoped<IOrderRepository, OrderRepository>(); //this is the built-in DI container for the Repository
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //this is the built-in DI container for the Service
 builder.Services.AddScoped<ICategoryService, CategoryService>(); //this is the built-in DI container for the Repository
@@ -67,7 +68,6 @@ builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 
 builder.Services.AddDbContext<DatabaseContext>(); // For the database context
 
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 
@@ -114,5 +114,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.Run();
