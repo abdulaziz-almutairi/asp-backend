@@ -1,3 +1,4 @@
+
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();// after the builder variable
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
-builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true); // this is to lowercase all letters
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 
 // Add services to the container.
@@ -68,10 +68,7 @@ builder.Services.AddScoped<ICustomerOrderService, CustomerOrderService>();
 builder.Services.AddScoped<ICustomerOrderRepository, CustomerOrderRepository>();
 
 
-builder.Services.AddDbContext<DatabaseContext>((options) =>
-{
-    options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
-});
+
 
 
 
@@ -109,6 +106,8 @@ builder.Services.AddCors(options =>
                       });
 });
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 
 var app = builder.Build();
 app.MapControllers();// Should be added after the app variable
@@ -124,6 +123,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 // app.UseCors(MyAllowSpecificOrigins);
 
 app.UseCors(MyAllowSpecificOrigins); //this is to invoke the Cors to access between back-end & front-end

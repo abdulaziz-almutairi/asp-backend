@@ -2,26 +2,27 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
-using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
 #nullable disable
 
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240513073452_db-init")]
+    partial class dbinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "customer", "admin" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>
@@ -157,8 +158,8 @@ namespace Backend.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<Role>("Role")
-                        .HasColumnType("role")
+                    b.Property<int>("Role")
+                        .HasColumnType("integer")
                         .HasColumnName("role");
 
                     b.Property<int>("Salt")
@@ -186,14 +187,12 @@ namespace Backend.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("customer_order_id");
 
-
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid")
                         .HasColumnName("order_id");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
-
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
@@ -208,7 +207,6 @@ namespace Backend.Migrations
 
                     b.HasIndex("OrderId")
                         .HasDatabaseName("ix_order_items_order_id");
-
 
                     b.ToTable("order_items", (string)null);
                 });
@@ -248,24 +246,6 @@ namespace Backend.Migrations
                         .HasConstraintName("fk_order_items_orders_order_id");
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>
-                {
-                    b.Navigation("OrderItem");
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.OrderItem", b =>
-                {
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", null)
-                        .WithMany("OrderItem")
-                        .HasForeignKey("CustomerOrderId")
-                        .HasConstraintName("fk_order_items_customer_orders_customer_order_id");
-
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", null)
-                        .WithMany("OrderItem")
-                        .HasForeignKey("OrderId1")
-                        .HasConstraintName("fk_order_items_orders_order_id1");
                 });
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>
