@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();// after the builder variable
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 var _config = builder.Configuration;
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Database={_config["Db:Database"]};Password={_config["Db:Password"]}");
@@ -82,5 +83,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.Run();

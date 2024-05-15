@@ -1,5 +1,6 @@
 
 
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
@@ -29,7 +30,9 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Services
 
         public Order? FindOne(Guid OrderId)
         {
+            if (FindOne == null) throw new Exception();
             return _orderRepository.FindOne(OrderId);
+
 
         }
 
