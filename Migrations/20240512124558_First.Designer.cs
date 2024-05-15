@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
@@ -12,9 +13,11 @@ using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240512124558_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,14 +189,18 @@ namespace Backend.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("customer_order_id");
 
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uuid")
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("order_id");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid?>("OrderId1")
                         .HasColumnType("uuid")
+                        .HasColumnName("order_id1");
 
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
@@ -206,9 +213,8 @@ namespace Backend.Migrations
                     b.HasIndex("CustomerOrderId")
                         .HasDatabaseName("ix_order_items_customer_order_id");
 
-                    b.HasIndex("OrderId")
-                        .HasDatabaseName("ix_order_items_order_id");
-
+                    b.HasIndex("OrderId1")
+                        .HasDatabaseName("ix_order_items_order_id1");
 
                     b.ToTable("order_items", (string)null);
                 });
@@ -225,34 +231,14 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.Entities.Product", b =>
                 {
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Category", null)
+                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_products_categories_category_id");
-                });
 
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.OrderItem", b =>
-                {
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", null)
-                        .WithMany("OrderItem")
-                        .HasForeignKey("CustomerOrderId")
-                        .HasConstraintName("fk_order_items_customer_orders_customer_order_id");
-
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", "Order")
-                        .WithMany("OrderItem")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_order_items_orders_order_id");
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>
-                {
-                    b.Navigation("OrderItem");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.OrderItem", b =>

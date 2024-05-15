@@ -36,11 +36,30 @@ namespace sda_backend_teamwork.src.Controllers
             return deleeProduct;
         }
 
+        // public IEnumerable<Product> FindAll(int limit, int offset)
+
+        // {   int limit = 1;
+        //     int offset = (_products -1)* _products;
+        //     var paginated = _products.Skip(offset).Take(limit);
+        //     return _products.ToList();
+        // }
+        // public IEnumerable<Product> FindAll(int limit, int page)
+        // {
+        //     int offset = (page - 1) * limit;
+        //     var paginated = _products.Skip(offset).Take(limit);
+        //     return paginated.ToList();
+        // }
+
         public IEnumerable<Product> FindAll()
         {
-            return _products.ToList();
+            return _products;
         }
 
+        public Product? FindOne(Guid productId)
+        {
+            var foundProduct = _products.FirstOrDefault(product => product.Id == productId);
 
+            return foundProduct;
+        }
     }
 }

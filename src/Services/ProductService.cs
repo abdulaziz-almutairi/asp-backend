@@ -29,19 +29,36 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.CreateOne(mappedProduct);
         }
 
+        public IEnumerable<Product> FindAll()
+        {
+
+            return _productRepository.FindAll();
+        }
+
         public Product? DeleteProduct(Guid productId)
         {
-            Product? findProduct = _productRepository.FindAll().FirstOrDefault(product => product.Id == productId);
+            Product? findProduct = _productRepository.FindOne(productId);
             if (findProduct == null)
             {
                 return null;
             }
             return _productRepository.DeleteProduct(findProduct);
+
         }
 
-        public IEnumerable<Product> FindAll()
+
+
+
+        public ProductReadDto? FindOne(Guid id)
         {
-            return _productRepository.FindAll();
+            Product? product = _productRepository.FindOne(id);
+
+            if (product is null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<ProductReadDto>(product);
         }
 
 

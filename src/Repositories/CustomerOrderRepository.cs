@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
 using Microsoft.EntityFrameworkCore;
-namespace sda_onsite_2_csharp_backend_teamwork;
+namespace sda_onsite_2_csharp_backend_teamwork.src;
 
 
 public class CustomerOrderRepository : ICustomerOrderRepository

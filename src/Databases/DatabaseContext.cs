@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
 namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
 {
@@ -13,17 +14,19 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Databases
         public DbSet<OrderItem> OrderItems { get; set; }
 
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-        // //
-        //     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //     {
-        //         modelBuilder.HasPostgresEnum<Role>();
-        //     }
-        //         }
 
-        /*
-        Please Note u need to cheange the Pgadmin Password on appsettings.json file 
-        */
+
+ 
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { } //database config is now cming from Proram.cs
+
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasPostgresEnum<Role>();
+        }
+
 
 
     }
