@@ -112,6 +112,11 @@ namespace Backend.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("image");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -186,14 +191,12 @@ namespace Backend.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("customer_order_id");
 
-
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid")
                         .HasColumnName("order_id");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
-
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
@@ -208,7 +211,6 @@ namespace Backend.Migrations
 
                     b.HasIndex("OrderId")
                         .HasDatabaseName("ix_order_items_order_id");
-
 
                     b.ToTable("order_items", (string)null);
                 });
@@ -248,24 +250,6 @@ namespace Backend.Migrations
                         .HasConstraintName("fk_order_items_orders_order_id");
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>
-                {
-                    b.Navigation("OrderItem");
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.src.OrderItem", b =>
-                {
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", null)
-                        .WithMany("OrderItem")
-                        .HasForeignKey("CustomerOrderId")
-                        .HasConstraintName("fk_order_items_customer_orders_customer_order_id");
-
-                    b.HasOne("sda_onsite_2_csharp_backend_teamwork.src.Entities.Order", null)
-                        .WithMany("OrderItem")
-                        .HasForeignKey("OrderId1")
-                        .HasConstraintName("fk_order_items_orders_order_id1");
                 });
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>

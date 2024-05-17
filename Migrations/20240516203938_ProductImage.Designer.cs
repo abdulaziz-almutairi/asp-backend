@@ -6,14 +6,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
+using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 
 #nullable disable
 
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240513073452_db-init")]
-    partial class dbinit
+    [Migration("20240516203938_ProductImage")]
+    partial class ProductImage
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +24,7 @@ namespace Backend.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "customer", "admin" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork.CustomerOrder", b =>
@@ -113,6 +115,11 @@ namespace Backend.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("image");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -158,8 +165,8 @@ namespace Backend.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("integer")
+                    b.Property<Role>("Role")
+                        .HasColumnType("role")
                         .HasColumnName("role");
 
                     b.Property<int>("Salt")
