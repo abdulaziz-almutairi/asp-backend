@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using sda_onsite_2_csharp_backend_teamwork.src.Databases;
@@ -12,9 +13,11 @@ using sda_onsite_2_csharp_backend_teamwork.src.Enums;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240517233411_ProductImage")]
+    partial class ProductImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,11 +115,6 @@ namespace Backend.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
                     b.Property<string>("Image")
                         .HasColumnType("text")
                         .HasColumnName("image");
@@ -129,10 +127,6 @@ namespace Backend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("integer")
                         .HasColumnName("price");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer")
-                        .HasColumnName("quantity");
 
                     b.HasKey("Id")
                         .HasName("pk_products");

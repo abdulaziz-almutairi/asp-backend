@@ -61,5 +61,16 @@ namespace sda_backend_teamwork.src.Controllers
 
             return foundProduct;
         }
+        public Product UpdateOne(Product updatedProduct)
+        {
+            _products.Update(updatedProduct);
+            _databaseContext.SaveChanges();
+            return updatedProduct;
+        }
+        public void UpdateQuantity(Product updatedProduct)
+        {
+            _products.Update(updatedProduct);
+            _databaseContext.SaveChanges();
+        }
     }
 }

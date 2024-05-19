@@ -29,10 +29,15 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _productRepository.CreateOne(mappedProduct);
         }
 
-        public IEnumerable<Product> FindAll()
+        public IEnumerable<ProductReadDto> FindAll(string? s)
         {
-
-            return _productRepository.FindAll();
+            var products = _productRepository.FindAll();
+            if (s is not null)
+            {
+                products = products.Where(product => product.Name.ToLower().Contains(s.ToLower()));
+            }
+            var productRead = products.Select(_mapper.Map<ProductReadDto>);
+            return productRead;
         }
 
         public Product? DeleteProduct(Guid productId)
@@ -61,6 +66,23 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return _mapper.Map<ProductReadDto>(product);
         }
 
+        public ProductReadDto? UpdateOne(Guid id, ProductReadDto updatedReadProduct)
+        {
+            Product? updatedProduct = _productRepository.FindOne(id);
+            if (updatedProduct is not null)
+            {
+                updatedProduct.Name = updatedReadProduct.Name;
+                updatedProduct.Price = updatedReadProduct.Price;
+                updatedProduct.Quantity = updatedReadProduct.Quantity;
+                updatedProduct.CategoryId = updatedReadProduct.CategoryId;
+                updatedProduct.Image = updatedReadProduct.Image;
+                updatedProduct.Description = updatedReadProduct.Description;
 
+                var productAllInfo = _productRepository.UpdateOne(updatedProduct);
+                var productRead = _mapper.Map<ProductReadDto>(productAllInfo);
+                return productRead;
+            }
+            else return null;
+        }
     }
 }

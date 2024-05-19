@@ -22,17 +22,20 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
         // products?limit=5&page=1
 
         [HttpGet]
-        public IEnumerable<Product> FindAll()
+        public ActionResult<IEnumerable<Product>> FindAll([FromQuery(Name = "s")] string? s)
         {
-
-            return _productService.FindAll(); // this to run the method to get all the products
+            return Ok(_productService.FindAll(s)); // this to run the method to get all the products
         }
 
 
         [HttpPost] //to use this method, import AspNetCore
-        public Product CreateOne([FromBody] ProductCreateDto productCreateDto) //this is the body example to send data
+        public ActionResult<Product> CreateOne([FromBody] ProductCreateDto productCreateDto) //this is the body example to send data
         {
-            return _productService.CreateOne(productCreateDto);//this is how we talk to service
+            if (productCreateDto != null)
+            {
+                return Ok(_productService.CreateOne(productCreateDto));//this is how we talk to service
+            }
+            throw new Exception("");
         }
 
         [HttpDelete("{productId}")]
@@ -52,5 +55,14 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers
             return Ok(product);
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<ProductReadDto> UpdateOne(Guid id, [FromBody] ProductReadDto updatedProduct)
+        {
+            ProductReadDto? product = _productService.UpdateOne(id, updatedProduct);
+            if (product is null) return BadRequest();
+            return CreatedAtAction(nameof(UpdateOne), product);
+        }
     }
 }
