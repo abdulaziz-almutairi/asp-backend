@@ -25,7 +25,7 @@ public class UserController : CostumeController
 
     [HttpGet("{email}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<UserReadDto?> FindOne(string email)
+    public ActionResult<UserReadDto?> FindOneByEmail(string email)
     {
         return Ok(_userService.FindOneByEmail(email));
     }
@@ -59,4 +59,29 @@ public class UserController : CostumeController
         }
         return BadRequest();
     }
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult DeleteOne([FromRoute] Guid id)
+    {
+        bool isDeleted = _userService.DeleteOne(id);
+        if (!isDeleted)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<UserReadDto?> FindOne(Guid id)
+    {
+
+        UserReadDto? foundUser = _userService.FindOne(id);
+        if (foundUser is null)
+        {
+            throw new NullReferenceException();
+        }
+        return Ok(foundUser);
+    }
+
 }

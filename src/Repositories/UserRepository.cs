@@ -20,6 +20,11 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
         {
             return _users;
         }
+        public User? FindOne(Guid id)
+        {
+            User? user = _users.FirstOrDefault(user => user.Id == id);
+            return user;
+        }
 
         public User CreateOne(User user)
         {
@@ -32,6 +37,13 @@ namespace sda_onsite_2_csharp_backend_teamwork.src.Repositories
             User? user = _users.FirstOrDefault(user => user.Email == email);
             return user;
         }
+        public bool DeleteOne(Guid id)
+        {
+            User? user = FindOne(id);
+            if (user is null) return false;
+            _users.Remove(user);
+            _databaseContext.SaveChanges();
+            return true;
+        }
     }
-
 }

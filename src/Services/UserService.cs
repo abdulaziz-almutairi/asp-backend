@@ -94,5 +94,14 @@ public class UserService : IUserService
         UserReadDto? userRead = _mapper.Map<UserReadDto>(user);
         return userRead;
     }
-
+    public UserReadDto? FindOne(Guid id)
+    {
+        User? user = _userRepository.FindOne(id);
+        UserReadDto? userRead = _mapper.Map<UserReadDto>(user);
+        return userRead;
+    }
+    public bool DeleteOne(Guid id)
+    {
+        return _userRepository.DeleteOne(id);
+    }
 }
