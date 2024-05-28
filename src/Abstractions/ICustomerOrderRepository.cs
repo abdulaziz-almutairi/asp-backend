@@ -5,6 +5,6 @@ public interface ICustomerOrderRepository
 {
     IEnumerable<CustomerOrder> GetAllOrders();
     CustomerOrder GetOrderById(Guid orderId);
-    void CreateOrder(CustomerOrder order);
-    void DeleteOrder(Guid orderId);
+    public CustomerOrder CreateOrder(CustomerOrder order);
+    public bool DeleteOrder(Guid orderId);
 }

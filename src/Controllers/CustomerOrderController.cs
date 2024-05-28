@@ -1,30 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
-using sda_onsite_2_csharp_backend_teamwork.src.Controllers;
-using sda_onsite_2_csharp_backend_teamwork.src.Entities;
+using AutoMapper;
 
 
-namespace sda_onsite_2_csharp_backend_teamwork.src;
+
+namespace sda_onsite_2_csharp_backend_teamwork.src.Controllers;
 
 
 public class CustomerOrderController : CostumeController
 {
     private readonly ICustomerOrderService _orderService;
+    private readonly IMapper _mapper;
 
-    public CustomerOrderController(ICustomerOrderService orderService)
+
+    public CustomerOrderController(ICustomerOrderService orderService, IMapper mapper)
     {
+        _mapper = mapper;
         _orderService = orderService;
     }
 
     [HttpGet]
-    public IActionResult GetAllOrders()
+    public ActionResult<IEnumerable<CustomerOrderReadDto>> GetAllOrders()
     {
-        var orders = _orderService.GetAllOrders();
-        return Ok(orders);
+        return Ok(_orderService.GetAllOrders());
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetOrderById(Guid id)
+    public ActionResult<CustomerOrderReadDto?> GetOrderById(Guid id)
     {
         var order = _orderService.GetOrderById(id);
         if (order == null)
@@ -35,18 +38,26 @@ public class CustomerOrderController : CostumeController
         return Ok(order);
     }
 
-    [HttpPost]
-    public IActionResult CreateOrder(CustomerOrder order)
-    {
-        _orderService.CreateOrder(order);
-        return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order);
-    }
-
     [HttpDelete("delete/{id}")]
-    public IActionResult DeleteOrder(Guid id)
+    public ActionResult DeleteOrder(Guid id)
     {
         _orderService.DeleteOrder(id);
         return NoContent();
+    }
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult<CustomerOrderReadDto> CreateOne(CustomerOrderReadDto order)
+    {
+        if (order is not null)
+        {
+            var orderToCreate = _mapper.Map<CustomerOrderCreateDto>(order);
+            var createdOrderItem = _orderService.CreateOrder(orderToCreate);
+            var createdOrder = _mapper.Map<CustomerOrderReadDto>(createdOrderItem);
+            return CreatedAtAction(nameof(GetOrderById), new { id = createdOrder.Id }, createdOrder);
+        }
+        return BadRequest();
     }
 }
 

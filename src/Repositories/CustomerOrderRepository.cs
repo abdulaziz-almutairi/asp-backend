@@ -39,20 +39,20 @@ public class CustomerOrderRepository : ICustomerOrderRepository
         }
     }
 
-    public void CreateOrder(CustomerOrder order)
+    public CustomerOrder CreateOrder(CustomerOrder order)
     {
         _orders.Add(order);
         _databaseContext.SaveChanges();
+        return order;
     }
 
 
-    public void DeleteOrder(Guid orderId)
+    public bool DeleteOrder(Guid orderId)
     {
-        var existingOrder = GetOrderById(orderId);
-        if (existingOrder != null)
-        {
-            _orders.Remove(existingOrder);
-            _databaseContext.SaveChanges();
-        }
+        CustomerOrder? order = GetOrderById(orderId);
+        if (order is null) return false;
+        _orders.Remove(order);
+        _databaseContext.SaveChanges();
+        return true;
     }
 }

@@ -1,5 +1,8 @@
 
+using AutoMapper;
 using sda_onsite_2_csharp_backend_teamwork.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork.src.DTOs;
+using sda_onsite_2_csharp_backend_teamwork.src.Entities;
 using sda_onsite_2_csharp_backend_teamwork.src.Repositories;
 
 
@@ -8,28 +11,44 @@ namespace sda_onsite_2_csharp_backend_teamwork;
 public class CustomerOrderService : ICustomerOrderService
 {
     private readonly ICustomerOrderRepository _repository;
+    private readonly IMapper _mapper;
 
-    public CustomerOrderService(ICustomerOrderRepository repository)
+
+    public CustomerOrderService(ICustomerOrderRepository repository, IMapper mapper)
     {
+        _mapper = mapper;
         _repository = repository;
     }
 
-    public IEnumerable<CustomerOrder> GetAllOrders()
+    public IEnumerable<CustomerOrderReadDto> GetAllOrders()
     {
-        return _repository.GetAllOrders();
+        var orders = _repository.GetAllOrders();
+        var ordersRead = orders.Select(_mapper.Map<CustomerOrderReadDto>);
+        return ordersRead;
     }
 
-    public CustomerOrder GetOrderById(Guid orderId)
+    public CustomerOrderReadDto? GetOrderById(Guid orderId)
     {
-        return _repository.GetOrderById(orderId);
+        CustomerOrder? order = _repository.GetOrderById(orderId);
+        CustomerOrderReadDto? orderRead = _mapper.Map<CustomerOrderReadDto>(order);
+        return orderRead;
     }
 
-    public void CreateOrder(CustomerOrder order)
+    public CustomerOrderReadDto CreateOrder(CustomerOrderCreateDto order)
     {
-        _repository.CreateOrder(order);
+        var orderEntity = _mapper.Map<CustomerOrder>(order);
+        if (orderEntity != null)
+        {
+            var createdOrder = _repository.CreateOrder(orderEntity);
+            return _mapper.Map<CustomerOrderReadDto>(createdOrder);
+        }
+        else
+        {
+            throw new Exception("Failed to create order.");
+        }
     }
-    public void DeleteOrder(Guid orderId)
+    public bool DeleteOrder(Guid orderId)
     {
-        _repository.DeleteOrder(orderId);
+        return _repository.DeleteOrder(orderId);
     }
 }

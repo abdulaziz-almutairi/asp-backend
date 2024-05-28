@@ -24,6 +24,10 @@ public class Mapper : Profile
         CreateMap<Product, ProductCreateDto>();
         CreateMap<ProductCreateDto, Product>();
 
+        CreateMap<CustomerOrderCreateDto, CustomerOrder>();
+        CreateMap<CustomerOrder, CustomerOrderReadDto>();
+        CreateMap<CustomerOrderReadDto, CustomerOrderCreateDto>();
+
     }
 
 }
